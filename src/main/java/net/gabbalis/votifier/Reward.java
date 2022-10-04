@@ -1,7 +1,7 @@
 package net.gabbalis.votifier;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 public abstract class Reward {
-    abstract void execute(ServerPlayerEntity player);
+    abstract void execute(ServerPlayer player);
 }

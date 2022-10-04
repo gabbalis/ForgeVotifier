@@ -1,6 +1,6 @@
 package net.gabbalis.votifier;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.*;
@@ -12,7 +12,7 @@ public class EventListener {
 
     @SubscribeEvent
     public static void onVoteEvent(final VoteEvent event){
-        ServerPlayerEntity player = event.getPlayer();
+        ServerPlayer player = event.getPlayer();
         Reward[] rewards = Config.getRewards();
         for (int i = 0; i< rewards.length; i++){
             rewards[i].execute(player);

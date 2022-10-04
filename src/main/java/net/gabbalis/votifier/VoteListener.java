@@ -1,9 +1,7 @@
 package net.gabbalis.votifier;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.server.management.PlayerList;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.common.MinecraftForge;
@@ -140,7 +138,7 @@ public class VoteListener extends Thread{
         String dateString = lines [4];
         LOGGER.info(user + " has voted using the site: " + site);
         PlayerList players = ServerLifecycleHooks.getCurrentServer().getPlayerList();
-        ServerPlayerEntity player = players.getPlayerByUsername(user);
+        ServerPlayer player = players.getPlayerByName(user);
         if (player != null) {
             LOGGER.info("Player found, issuing reward event.");
             VoteEvent e = new VoteEvent(site, sourceIp, player, dateString);

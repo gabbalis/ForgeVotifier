@@ -1,9 +1,8 @@
 package net.gabbalis.votifier;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.LogicalSidedProvider;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,8 +19,8 @@ public class CommandReward extends Reward{
 
     }
     @Override
-    void execute(ServerPlayerEntity player) {
-        MinecraftServer server = LogicalSidedProvider.INSTANCE.get(LogicalSide.SERVER);
+    void execute(ServerPlayer player) {
+        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
         String[] parts = command.split("<player>");
         String finalCommand = null;
         if(parts.length==1){
@@ -39,6 +38,6 @@ public class CommandReward extends Reward{
             finalCommand = b.toString();
         }
         LOGGER.info("Cdaommand Run: " + finalCommand);
-        server.getCommandManager().handleCommand(server.getCommandSource(), finalCommand);
+        server.getCommands().performCommand(server.createCommandSourceStack(), finalCommand);
     }
 }
