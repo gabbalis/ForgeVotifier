@@ -11,18 +11,19 @@ public class CommandReward extends Reward{
     String command;
     public CommandReward(String command){
         this.command = command;
-        if (this.command.equals(null)){
-            LOGGER.error("Command string is Null. Initializing error command.");
-            this.command = "/say Error- Attempted to Execute Undefined Reward Command.";
-        };
+//        if (command.equals(null)){
+//            LOGGER.error("Command string is Null. Initializing error command.");
+//            this.command = "/say Error- Attempted to Execute Undefined Reward Command.";
+//        };
 
 
     }
     @Override
     void execute(ServerPlayer player) {
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        //MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        MinecraftServer server = player.server;
         String[] parts = command.split("<player>");
-        String finalCommand = null;
+        String finalCommand; // = null;
         if(parts.length==1){
             finalCommand = parts[0];
         }
@@ -37,7 +38,7 @@ public class CommandReward extends Reward{
             }
             finalCommand = b.toString();
         }
-        LOGGER.info("Cdaommand Run: " + finalCommand);
-        server.getCommands().performCommand(server.createCommandSourceStack(), finalCommand);
+        LOGGER.info("Command Run: " + finalCommand);
+        server.getCommands().performPrefixedCommand(server.createCommandSourceStack(), finalCommand);
     }
 }

@@ -1,4 +1,4 @@
-Forge Votifier for 1.16.5
+Forge Votifier for 1.19.2
 
 To install, add this mod to your mods folder then run the server.
 
